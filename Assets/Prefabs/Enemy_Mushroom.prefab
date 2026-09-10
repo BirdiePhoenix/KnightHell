@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6bb4fc15a1be2149b50e6736c0a593e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  enemySpeed: 1.5
+  enemyStats: {fileID: 11400000, guid: e2276f9ecf21b70478cbbcba69c7e825, type: 2}
   enemyRb: {fileID: 8668942881549830744}
+  stoppingDistance: 1.2
 --- !u!50 &8668942881549830744
 Rigidbody2D:
   serializedVersion: 5
