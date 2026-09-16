@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : EnemyBehaviour
 {
     //[SerializeField] private float enemySpeed = 2.0f;
-    public EntityStats enemyStats;
+    //public EntityStats enemyStats;
 
     public Rigidbody2D enemyRb;
-    private GameObject player;
+    //private GameObject player;
     private float distance;
     [SerializeField] private float stoppingDistance;
     public EnemyAttack enemyAttack;
@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         enemyRb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
