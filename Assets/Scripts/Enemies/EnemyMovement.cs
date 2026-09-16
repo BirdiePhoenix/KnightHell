@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
         distance = Vector2.Distance(player.transform.position, transform.position);
         Vector2 lookDirection = (player.transform.position - transform.position).normalized;
         //enemyRb.AddForce(lookDirection * enemySpeed);
-
+        Debug.Log(distance);
         //Checks if the distance between the player and the enemy is greater than the stopping distance
         if (distance > stoppingDistance)
         {

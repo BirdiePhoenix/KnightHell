@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +12,20 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemyTypes = new List<GameObject>();
     [SerializeField] private List<GameObject> spawnPoints = new List<GameObject>();
 
+    [SerializeField] private float mushroomInterval = 3.5f;
+    [SerializeField] private float goblinInterval = 5;
+
+    private GameObject player;
+
+
     private bool canSpawn = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //waveManager = GetComponent<WaveManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(SpawnEnemy(mushroomInterval, enemyTypes[0]));
+        StartCoroutine(SpawnEnemy(goblinInterval, enemyTypes[1]));
     }
 
     // Update is called once per frame
@@ -25,46 +35,54 @@ public class EnemySpawner : MonoBehaviour
         {
             canSpawn = true;
         }
-        SpawnEnemy(); // Example: spawn the first enemy type at the spawner's position  
+       // SpawnEnemy(); // Example: spawn the first enemy type at the spawner's position  
     }
 
-    private void SpawnEnemy()
-    {
-        //if (enemyTypeIndex < 0 || enemyTypeIndex >= enemyTypes.Count)
-        //{
-        //    Debug.LogError("Invalid enemy type index: " + enemyTypeIndex);
-        //    return;
-        //}
+    //private void SpawnEnemy()
+    //{
+    //    //if (enemyTypeIndex < 0 || enemyTypeIndex >= enemyTypes.Count)
+    //    //{
+    //    //    Debug.LogError("Invalid enemy type index: " + enemyTypeIndex);
+    //    //    return;
+    //    //}
         
-        if ((timer.Seconds % 10 == 0 || timer.Seconds == 0) && canSpawn) // Spawn enemies every 10 seconds
-        {
-            int amountToSpawn = waveManager.AmountOfEnemies; // Assuming you have a WaveManager instance to get the amount of enemies to spawn
-            int _rndmIndex = GenerateSpawnPoint();
-            Debug.Log(_rndmIndex);
-            int enemyTypeIndex = GenerateEnemyType();
-            Debug.Log(enemyTypeIndex);
+    //    if ((timer.Seconds % 10 == 0 || timer.Seconds == 0) && canSpawn) // Spawn enemies every 10 seconds
+    //    {
+    //        int amountToSpawn = waveManager.AmountOfEnemies; // Assuming you have a WaveManager instance to get the amount of enemies to spawn
+    //        int _rndmIndex = GenerateSpawnPoint();
+    //        Debug.Log(_rndmIndex);
+    //        int enemyTypeIndex = GenerateEnemyType();
+    //        Debug.Log(enemyTypeIndex);
 
-            canSpawn = false;
-            // Spawn enemies
-            for (int i = 0; i < amountToSpawn; i++)
-            {
-                var enemy = Instantiate(enemyTypes[enemyTypeIndex]);
-                enemy.transform.position = spawnPoints[_rndmIndex].transform.position;
-            }
-        } 
-    }
+    //        canSpawn = false;
+    //        // Spawn enemies
+    //        for (int i = 0; i < amountToSpawn; i++)
+    //        {
+    //            var enemy = Instantiate(enemyTypes[enemyTypeIndex]);
+    //            enemy.transform.position = spawnPoints[_rndmIndex].transform.position;
+    //        }
+    //    } 
+    //}
 
-    private int GenerateSpawnPoint()
+    //private int GenerateSpawnPoint()
+    //{
+    //    int maxSpawnPoints = spawnPoints.Count;
+    //    int rndmIndex = Random.Range(0, maxSpawnPoints);
+    //    return rndmIndex;
+    //}
+
+    //private int GenerateEnemyType()
+    //{
+    //    int maxEnemyTypes = enemyTypes.Count;
+    //    int rndmIndex = Random.Range(0, maxEnemyTypes);
+    //    return rndmIndex;
+    //}
+
+    private IEnumerator SpawnEnemy(float interval, GameObject enemy)
     {
-        int maxSpawnPoints = spawnPoints.Count;
-        int rndmIndex = Random.Range(0, maxSpawnPoints);
-        return rndmIndex;
-    }
-
-    private int GenerateEnemyType()
-    {
-        int maxEnemyTypes = enemyTypes.Count;
-        int rndmIndex = Random.Range(0, maxEnemyTypes);
-        return rndmIndex;
+        yield return new WaitForSeconds(interval);
+        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(player.transform.position.x + 5 -5f, player.transform.position.x + 5 + 5), 
+            Random.Range(player.transform.position.y + 5 -6f, player.transform.position.y + 5 + 6), 0), Quaternion.identity);
+        StartCoroutine(SpawnEnemy(interval, enemy));
     }
 }
