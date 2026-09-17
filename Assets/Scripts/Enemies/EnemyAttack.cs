@@ -2,13 +2,14 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.Collections;
 
-public class EnemyAttack : EnemyBehaviour
+public class EnemyAttack : MonoBehaviour
 {
-    //public EntityStats enemyStats;
+    public EntityStats enemyStats;
+    private GameObject player;
 
     private void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public IEnumerator Attack()

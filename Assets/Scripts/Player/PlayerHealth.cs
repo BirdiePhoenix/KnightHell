@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : PlayerBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     public EntityStats playerStats;
 

@@ -31,10 +31,10 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if(timer.Seconds % 10 == 3)
-        //{
-        //    canSpawn = true;
-        //}
+        if(timer.Seconds % 10 == 3)
+        {
+            canSpawn = true;
+        }
        // SpawnEnemy(); // Example: spawn the first enemy type at the spawner's position  
     }
 
@@ -81,8 +81,8 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemy(float interval, GameObject enemy)
     {
         yield return new WaitForSeconds(interval);
-        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(player.transform.position.x - 5 -5f, player.transform.position.x + 5 + 5), 
-            Random.Range(player.transform.position.y - 5 -6f, player.transform.position.y + 5 + 6), 0), Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(player.transform.position.x + 5 -5f, player.transform.position.x + 5 + 5), 
+            Random.Range(player.transform.position.y + 5 -6f, player.transform.position.y + 5 + 6), 0), Quaternion.identity);
         StartCoroutine(SpawnEnemy(interval, enemy));
     }
 }
