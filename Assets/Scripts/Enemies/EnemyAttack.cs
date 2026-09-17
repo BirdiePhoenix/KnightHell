@@ -14,6 +14,15 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public void SetIsPlayerInRange(bool _isPlayerInRange)
+    {
+        isPlayerInRange = _isPlayerInRange;
+    }
+    public bool GetIsPlayerInRange()
+    {
+        return isPlayerInRange;
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Collision with " + collider);
