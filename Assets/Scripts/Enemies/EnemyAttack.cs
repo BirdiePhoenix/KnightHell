@@ -8,6 +8,7 @@ public class EnemyAttack : MonoBehaviour
     public EntityStats enemyStats;
     private GameObject player;
     private bool isPlayerInRange = false;
+    private float canAttack;
 
     private void Start()
     {
@@ -23,32 +24,48 @@ public class EnemyAttack : MonoBehaviour
         return isPlayerInRange;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log("Collision with " + collider);
-        if(collider.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            isPlayerInRange = true;
-            StartCoroutine(Attack());
+            if(enemyStats.attackSpeed <= canAttack)
+            {
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
+                canAttack = 0;
+            }
+            else
+            {
+                canAttack += Time.deltaTime;
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        Debug.Log("Collision with " + other);
+        if(other.gameObject.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+            //StartCoroutine(Attack());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
             isPlayerInRange = false;
         }
     }
 
-    public IEnumerator Attack()
-    {
-        yield return new WaitForSeconds(enemyStats.attackSpeed);
-        Debug.Log("Hit!");
-        //player.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
-        if (isPlayerInRange)
-        {
-            StartCoroutine(Attack());
-        }
-    }
+    //public IEnumerator Attack()
+    //{
+    //    yield return new WaitForSeconds(enemyStats.attackSpeed);
+    //    Debug.Log("Hit!");
+    //    //player.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
+    //    if (isPlayerInRange)
+    //    {
+    //        StartCoroutine(Attack());
+    //    }
+    //}
 }
