@@ -28,7 +28,11 @@ public class EnemyMovement : MonoBehaviour
         if (!enemyAttack.GetIsPlayerInRange())
         {
             enemyRb.MovePosition(enemyRb.position + lookDirection * enemyStats.movementSpeed * Time.fixedDeltaTime);
-        }        
+        }
+        else
+        {
+            Debug.Log("Stoppin");
+        }
     }
 
     private void FixedUpdate()

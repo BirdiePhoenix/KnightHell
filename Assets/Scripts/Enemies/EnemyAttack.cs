@@ -24,21 +24,22 @@ public class EnemyAttack : MonoBehaviour
         return isPlayerInRange;
     }
 
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if(enemyStats.attackSpeed <= canAttack)
-            {
-                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
-                canAttack = 0;
-            }
-            else
-            {
-                canAttack += Time.deltaTime;
-            }
-        }
-    }
+    //private void OnCollisionStay2D(Collision2D other)
+    //{
+    //    Debug.Log("Attack!");
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        if(enemyStats.attackSpeed <= canAttack)
+    //        {
+    //            other.gameObject.GetComponent<PlayerHealth>().EditHealth(enemyStats.damage);
+    //            canAttack = 0;
+    //        }
+    //        else
+    //        {
+    //            canAttack += Time.deltaTime;
+    //        }
+    //    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -46,7 +47,8 @@ public class EnemyAttack : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            //StartCoroutine(Attack());
+            player.GetComponent<PlayerHealth>().EditHealth(enemyStats.damage);
+            StartCoroutine(Attack());
         }
     }
 
@@ -58,14 +60,14 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    //public IEnumerator Attack()
-    //{
-    //    yield return new WaitForSeconds(enemyStats.attackSpeed);
-    //    Debug.Log("Hit!");
-    //    //player.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
-    //    if (isPlayerInRange)
-    //    {
-    //        StartCoroutine(Attack());
-    //    }
-    //}
+    public IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(enemyStats.attackSpeed);
+        Debug.Log("Hit!");
+        player.GetComponent<PlayerHealth>().EditHealth(enemyStats.damage);
+        if (isPlayerInRange)
+        {
+            StartCoroutine(Attack());
+        }
+    }
 }
