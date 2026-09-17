@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &191462338
 Transform:
   m_ObjectHideFlags: 0
@@ -547,6 +547,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 375814946510878747, guid: 70324e6f82132d341b0295e6c8558cfa, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 772585002449797263, guid: 70324e6f82132d341b0295e6c8558cfa, type: 3}
       propertyPath: m_Name
       value: Enemy_Mushroom

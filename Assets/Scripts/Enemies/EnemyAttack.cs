@@ -4,27 +4,42 @@ using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
+
     public EntityStats enemyStats;
     private GameObject player;
+    private bool isPlayerInRange = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Collision");
-        if(collision.gameObject.CompareTag("Player"))
+        Debug.Log("Collision with " + collider);
+        if(collider.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hit!");
+            isPlayerInRange = true;
+            StartCoroutine(Attack());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
         }
     }
 
     public IEnumerator Attack()
     {
         yield return new WaitForSeconds(enemyStats.attackSpeed);
-        
-        player.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
+        Debug.Log("Hit!");
+        //player.GetComponent<PlayerHealth>().TakeDamage(enemyStats.damage);
+        if (isPlayerInRange)
+        {
+            StartCoroutine(Attack());
+        }
     }
 }
