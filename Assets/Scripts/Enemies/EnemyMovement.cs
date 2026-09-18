@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Stoppin");
+            //Debug.Log("Stoppin");
         }
     }
 

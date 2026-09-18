@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public EntityStats playerStats;
+    [SerializeField] private PlayerStats playerStats;
 
     private void Start()
     {
-        playerStats.currentHealth = playerStats.maxHealth;
+        
     }
 
     public void EditHealth(float damage)
     {
-        playerStats.currentHealth -= damage;
-        Debug.Log($"You took {damage} damage. Current health: {playerStats.currentHealth}");
+        if(playerStats.CurrentHealth > 0)
+        {
+            playerStats.CurrentHealth -= damage;
+            Debug.Log($"You took {damage} damage. Current health: {playerStats.CurrentHealth}");
+        }
 
-        if (playerStats.currentHealth <= 0)
+        if (playerStats.CurrentHealth <= 0)
         {
             Die();
         }
@@ -24,10 +27,10 @@ public class PlayerHealth : MonoBehaviour
     {
         // Handle player death (e.g., reload scene, show game over screen, etc.)
         Debug.Log("Player has died.");
-        
-        if(playerStats.currentHealth <= 0)
+
+        if (playerStats.CurrentHealth <= 0)
         {
-            playerStats.currentHealth = 0;
+            playerStats.CurrentHealth = 0;
         }
     }
 }

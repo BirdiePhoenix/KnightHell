@@ -213,9 +213,9 @@ GameObject:
   m_Component:
   - component: {fileID: 556170010}
   - component: {fileID: 556170009}
-  - component: {fileID: 556170008}
   - component: {fileID: 556170012}
   - component: {fileID: 556170011}
+  - component: {fileID: 556170013}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -223,14 +223,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &556170008
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556170007}
-  m_Enabled: 0
 --- !u!20 &556170009
 Camera:
   m_ObjectHideFlags: 0
@@ -355,6 +347,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   mainCamera: {fileID: 556170007}
   player: {fileID: 1201533155}
+--- !u!114 &556170013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556170007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &575601819
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +610,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4885516075664502994, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
   m_PrefabInstance: {fileID: 3554760793257394813}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1201533156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101475434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc86379944e7a34f9a8a54bbcff63b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  playerStatsSO: {fileID: 11400000, guid: 58a4bf7c117868742904fd29162aab55, type: 2}
 --- !u!1 &1440896274
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +967,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
+  m_ActiveFontFeatures: 6e72656bu
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1021,6 +1040,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 101475434}
+    - target: {fileID: 2020536559723264015, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 1201533156}
+    - target: {fileID: 2020536559723264015, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
+      propertyPath: playerStatsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 58a4bf7c117868742904fd29162aab55, type: 2}
     - target: {fileID: 4885516075664502994, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1068,7 +1095,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6683402901502573679, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1201533156}
   m_SourcePrefab: {fileID: 100100000, guid: f93a94d90b1a49c43bbd596718a9ae32, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
